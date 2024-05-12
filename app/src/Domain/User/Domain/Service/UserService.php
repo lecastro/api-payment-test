@@ -11,7 +11,7 @@ class UserService
     public function __construct(protected UserRepositoryInterface $repository)
     {
     }
-    
+
     public function checkIfEmailExists(string $email): bool
     {
         $existingUser = $this->repository->findByEmail($email);
@@ -36,6 +36,7 @@ class UserService
             if ($this->checkIfCPFExists($user->document())) {
                 UserValidation::validateCPF($user->document());
             }
+
             $this->repository->create($user);
         } catch (\Throwable $th) {
             throw $th;

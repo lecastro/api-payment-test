@@ -28,6 +28,8 @@ class RegisterService
             'name'      => $request->get('name'),
             'email'     => $request->get('email'),
             'password'  => Hash::make($request->get('password')),
+            'document'  => $request->get('document'),
+            'type'      => $request->get('email'),
         ]);
 
         $token = $user->createToken($request->get('email'))->accessToken;

@@ -17,10 +17,11 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'                  => 'required',
-            'email'                 => 'required|email',
-            'password'              => 'required',
-            'password_confirmation' => 'required|same:password'
+            'name'     => 'required',
+            'email'    => 'required|email',
+            'password' => 'required',
+            'document' => 'required',
+            'type'     => 'required',
         ];
     }
 }

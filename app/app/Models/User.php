@@ -15,8 +15,11 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public $incrementing = false;
+
     /** @var array<string>*/
     protected $fillable = [
+        'id',
         'name',
         'email',
         'password',
@@ -44,20 +47,5 @@ class User extends Authenticatable
     public function getPassword(): string
     {
         return $this->password;
-    }
-
-    public function getCreatedAtAttribute(string $value): string
-    {
-        return \Carbon\Carbon::parse($value)->format('d/m/Y');
-    }
-
-    public function getUpdatedAtAttribute(string $value): string
-    {
-        return \Carbon\Carbon::parse($value)->format('d/m/Y');
-    }
-
-    public function getDeletedAttribute(string $value): string
-    {
-        return \Carbon\Carbon::parse($value)->format('d/m/Y H:i:s');
     }
 }
