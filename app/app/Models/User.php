@@ -20,6 +20,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'document',
+        'type'
     ];
 
     /** @var array<string>*/
@@ -34,9 +36,9 @@ class User extends Authenticatable
         'password'          => 'hashed'
     ];
 
-    public function addresses(): HasMany
+    public function wallet(): HasMany
     {
-        return $this->hasMany(Product::class, 'id');
+        return $this->hasMany(Wallet::class, 'id');
     }
 
     public function getPassword(): string

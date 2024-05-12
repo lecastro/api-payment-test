@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use App\Models\User;
-use App\Models\Product;
+use App\Models\Wallet;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -12,11 +12,11 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create($this->table(), function (Blueprint $table): void {
-            $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->string('name');
-            $table->text('detail');
+        Schema::create($this->table(), function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('user_type')->index();
+            $table->foreignUuid('user_id');
+            $table->decimal('balance', 64, 0);
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('user_id')->references('id')->on($this->tableUser())->onDelete('cascade');
@@ -30,7 +30,7 @@ return new class extends Migration
 
     private function table(): string
     {
-        return (new Product())->getTable();
+        return (new Wallet())->getTable();
     }
 
     private function tableUser(): string
