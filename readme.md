@@ -106,11 +106,6 @@ docker compose exec -it web php artisan migrate
 
 ### instalação passport
 ```
-docker compose exec -it web php artisan passport:install
-```
-
-### instalação passport
-```
 docker compose exec -it web php artisan test
 ```
 
