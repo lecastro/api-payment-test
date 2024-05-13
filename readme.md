@@ -102,3 +102,78 @@ docker compose exec -it web php artisan migrate
 ```
 docker compose exec -it web php artisan passport:install
 ```
+
+### instalação passport
+```
+docker compose exec -it web php artisan test
+```
+
+### endpoint Registrar um novo usuário
+
+#### localhost/api/register
+```
+{
+	"name": "de123v",
+	"email": "dessqqw1d2w34@teste.com",
+	"password": "123456789",
+	"document": "819.143.160-29",
+	"type": "customer"
+}
+
+```
+
+response
+```
+{
+	"id": "c9c647df-0fd6-4519-9125-48515a5e00b4",
+	"name": "de123v",
+	"email": "dessqqw1d2w34@teste.com",
+	"document": "819.143.160-29",
+	"password": "$2y$12$2m2n6cIenZGttZZD6pDGrefuhvb4kmGHCLmy4SD4Wwkh1RsEp.rlO",
+	"type": "customer",
+	"createdAt": "2024-05-13 09:14:34"
+}
+```
+
+### endpoint depositar saldo
+
+#### localhost/api/deposit
+```
+{
+	"walletId": "5e164b9c-09a9-4f6c-bffa-45e7b897c1ec",
+	"amount": 100.00,
+}
+
+```
+
+response
+```
+{
+	"walletId": "5e164b9c-09a9-4f6c-bffa-45e7b897c1ec",
+	"amount": 100.00,
+}
+```
+
+#### localhost/api/transfer
+
+### endpoint depositar transferência
+
+```
+{
+  "value": 100.0,
+  "payerId": "5e164b9c-09a9-4f6c-bffa-45e7b897c1ec",
+  "payeeId": "c9c647df-0fd6-4519-9125-48515a5e00b4"
+}
+
+```
+
+response
+```
+{
+	"id": "87468751-857e-4c45-bb10-e7713dbedaf1",
+	"value": "100",
+	"payer": "5e164b9c-09a9-4f6c-bffa-45e7b897c1ec",
+	"payee": "c9c647df-0fd6-4519-9125-48515a5e00b4",
+	"status": "completed",
+	"createdAt": "2024-05-13 09:43:25"
+}
