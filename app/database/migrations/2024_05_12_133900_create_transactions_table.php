@@ -11,8 +11,8 @@ return new class extends Migration
     {
         Schema::create($this->table(), function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('payer_id')->constrained('wallets');
-            $table->foreignUuid('payee_id')->constrained('wallets');
+            $table->foreignUuid('payer_id');
+            $table->foreignUuid('payee_id');
             $table->decimal('amount', 64, 0);
             $table->string('status');
             $table->timestamps();

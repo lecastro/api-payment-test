@@ -28,6 +28,10 @@ class TransactionService
             $payerWallet = $this->walletService->getWalletByPayerId($transaction->payerId());
             $payeeWallet = $this->walletService->getWalletByPayeeId($transaction->payeeId());
 
+            if ($payerWallet == null || $payeeWallet == null) {
+                TransactionValidation::walletNotfound();
+            }
+
             if ($payerWallet->hasRetailer()) {
                 TransactionValidation::retailerNotAllowedToPay();
             }
@@ -38,6 +42,9 @@ class TransactionService
 
             $payeeWallet->deposit($transaction->amount());
             $payerWallet->withdrawal($transaction->amount());
+
+            $this->walletService->update($payeeWallet);
+            $this->walletService->update($payerWallet);
 
             $transaction->updateStatus(TransactionStatusEnum::COMPLETED);
 

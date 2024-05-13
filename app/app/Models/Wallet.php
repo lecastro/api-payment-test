@@ -10,8 +10,11 @@ class Wallet extends Model
 {
     use HasFactory;
 
+    public $incrementing = false;
+
     /** @var array<string>*/
     protected $fillable = [
+        'id',
         'user_type',
         'user_id',
         'balance'
@@ -20,5 +23,10 @@ class Wallet extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function getId(): string
+    {
+        return $this->id;
     }
 }

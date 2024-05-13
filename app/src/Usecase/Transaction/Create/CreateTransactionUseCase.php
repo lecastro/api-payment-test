@@ -21,9 +21,9 @@ class CreateTransactionUseCase
     {
         $transaction = new Transaction(
             id: null,
-            payerId: new Uuid($input->payee),
+            payerId: new Uuid($input->payer),
             payeeId: new Uuid($input->payee),
-            amount: 100.0,
+            amount: $input->amount,
             status: TransactionStatusEnum::CREATED
         );
 
@@ -32,8 +32,8 @@ class CreateTransactionUseCase
         return new OutputTransactionDTO(
             id: $transaction->id->get(),
             value: $transaction->amount,
-            payer: $transaction->payerId->id->get(),
-            payee: $transaction->payeeId->id->get(),
+            payer: $transaction->payerId->get(),
+            payee: $transaction->payeeId->get(),
             status: $transaction->status->value,
             createdAt: $transaction->createdAt->format('Y-m-d H:i:s')
         );

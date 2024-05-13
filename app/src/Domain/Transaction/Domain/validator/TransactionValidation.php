@@ -44,4 +44,9 @@ class TransactionValidation
     {
         throw new TransactionException('nessage not sent');
     }
+
+    public static function walletNotfound(): void
+    {
+        throw new TransactionException('wallet Not found');
+    }
 }

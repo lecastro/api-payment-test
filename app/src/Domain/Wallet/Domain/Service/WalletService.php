@@ -20,17 +20,23 @@ class WalletService
             return $wallet;
         }
 
-        return $this->walletRepository->create($user);
+        return $this->walletRepository->create(new Wallet(
+            null,
+            $user->type,
+            $user->id,
+            0,
+            $user->createdAt
+        ));
     }
 
     public function getWalletByPayerId(string $payerId): ?Wallet
     {
-        return $this->walletRepository->getWalletByPayerId($payerId);
+        return $this->walletRepository->findByWalletByUserId($payerId);
     }
 
     public function getWalletByPayeeId(string $payeeId): ?Wallet
     {
-        return $this->walletRepository->getWalletByPayeeId($payeeId);
+        return $this->walletRepository->findByWalletByUserId($payeeId);
     }
 
     public function findById(string $walletId): ?Wallet
@@ -60,29 +66,8 @@ class WalletService
         return $wallet->getBalance();
     }
 
-    public function deposit(string $walletId, float $amount): void
+    public function update(Wallet $wallet): void
     {
-        try {
-            $wallet = $this->walletRepository->findById($walletId);
-
-            if ($wallet === null) {
-                return;
-            }
-
-            $wallet->deposit($amount);
-        } catch (\Throwable $th) {
-            throw $th;
-        }
-    }
-
-    public function withdrawal(string $walletId, float $amount): void
-    {
-        $wallet = $this->walletRepository->findById($walletId);
-
-        if ($wallet === null) {
-            return;
-        }
-
-        $wallet->withdrawal($amount);
+        $this->walletRepository->update($wallet);
     }
 }

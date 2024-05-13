@@ -3,13 +3,16 @@
 namespace Domain\User\Domain\Service;
 
 use Domain\User\Domain\Entities\User;
+use Domain\Wallet\Domain\Service\WalletService;
 use Domain\User\Domain\validator\UserValidation;
 use Domain\User\Domain\Repository\UserRepositoryInterface;
 
 class UserService
 {
-    public function __construct(protected UserRepositoryInterface $repository)
-    {
+    public function __construct(
+        protected UserRepositoryInterface $repository,
+        protected WalletService $walletService
+    ) {
     }
 
     public function checkIfEmailExists(string $email): bool
@@ -38,6 +41,7 @@ class UserService
             }
 
             $this->repository->create($user);
+            $this->walletService->create($user);
         } catch (\Throwable $th) {
             throw $th;
         }

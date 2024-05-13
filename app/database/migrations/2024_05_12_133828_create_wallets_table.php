@@ -19,7 +19,7 @@ return new class extends Migration
             $table->decimal('balance', 64, 0);
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('user_id')->references('id')->on($this->tableUser())->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on($this->tableUser());
         });
     }
 

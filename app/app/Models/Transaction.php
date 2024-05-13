@@ -9,8 +9,11 @@ class Transaction extends Model
 {
     use HasFactory;
 
+    public $incrementing = false;
+
     /** @var array<string>*/
     protected $fillable = [
+        'id',
         'payer_id',
         'payee_id',
         'amount',
