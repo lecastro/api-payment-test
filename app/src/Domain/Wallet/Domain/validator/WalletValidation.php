@@ -2,8 +2,9 @@
 
 namespace Domain\Wallet\Domain\validator;
 
-use Domain\User\Domain\validator\Exceptions\NegativeBalanceException;
-use Domain\User\Domain\validator\Exceptions\InsufficientBalanceException;
+use Domain\Wallet\Domain\validator\Exceptions\WalletException;
+use Domain\Wallet\Domain\validator\Exceptions\NegativeBalanceException;
+use Domain\Wallet\Domain\validator\Exceptions\InsufficientBalanceException;
 
 class WalletValidation
 {
@@ -17,5 +18,10 @@ class WalletValidation
     public static function validateBalance(float $value): void
     {
         throw new InsufficientBalanceException("Insufficient balance for withdrawal {$value}");
+    }
+
+    public static function walletNotfound(): void
+    {
+        throw new WalletException('wallet Not found');
     }
 }

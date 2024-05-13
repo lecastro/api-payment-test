@@ -7,8 +7,8 @@ use Domain\Wallet\Domain\Entities\Wallet;
 use Domain\Shared\ValueObjects\Uuid;
 use Domain\Shared\Enums\TypeUserEnum;
 use Domain\Shared\ValueObjects\Document;
-use Domain\User\Domain\validator\Exceptions\NegativeBalanceException;
-use Domain\User\Domain\validator\Exceptions\InsufficientBalanceException;
+use Domain\Wallet\Domain\validator\Exceptions\NegativeBalanceException;
+use Domain\Wallet\Domain\validator\Exceptions\InsufficientBalanceException;
 
 beforeEach(function () {
     $this->faker    = Factory::create();

@@ -10,6 +10,8 @@ Route::post('login',[App\Http\Controllers\API\AuthController::class, 'login'])->
 
 Route::post('transfer',[App\Http\Controllers\API\TransactionController::class, 'transfer'])->name('transfer');
 
+Route::post('deposit',[App\Http\Controllers\API\WalletController::class, 'transfer'])->name('deposit');
+
 Route::middleware('auth:api')->group(function (): void {
     Route::post('/logout',[App\Http\Controllers\API\AuthController::class, 'logout'])->name('auth.logout');
 });

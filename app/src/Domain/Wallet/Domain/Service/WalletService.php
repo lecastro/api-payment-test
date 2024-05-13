@@ -2,8 +2,10 @@
 
 namespace Domain\Wallet\Domain\Service;
 
+use Domain\Shared\ValueObjects\Uuid;
 use Domain\User\Domain\Entities\User;
 use Domain\Wallet\Domain\Entities\Wallet;
+use Domain\Wallet\Domain\validator\WalletValidation;
 use Domain\Wallet\Domain\Repository\WalletRepositoryInterface;
 
 class WalletService
@@ -69,5 +71,28 @@ class WalletService
     public function update(Wallet $wallet): void
     {
         $this->walletRepository->update($wallet);
+    }
+
+    public function deposit(Uuid $walletId, float $amount): Wallet
+    {
+        $depositWallet = $this->findById($walletId->get());
+
+        if ($depositWallet === null) {
+            WalletValidation::walletNotfound();
+        }
+
+        WalletValidation::validateValueNegative($amount);
+
+        $wallet = new Wallet(
+            id: $walletId,
+            userType: $depositWallet->userType,
+            userId: $depositWallet->userId,
+            balance: $depositWallet->balance + $amount,
+            createdAt: $depositWallet->createdAt
+        );
+
+        $this->update($wallet);
+
+        return $wallet;
     }
 }
