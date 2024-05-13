@@ -10,7 +10,7 @@ beforeEach(function () {
     Artisan::call('passport:client --name=<client-name> --no-interaction --personal');
 });
 
-test('user api e2e: login', function () {
+test('user api e2e: login and logout', function () {
     $email = fake()->unique()->safeEmail();
 
     ModelUser::factory()->create([
@@ -22,7 +22,7 @@ test('user api e2e: login', function () {
         'type'      => TypeUserEnum::CUSTOMER
     ]);
 
-    $response = $this->json(
+    $responseLogin = $this->json(
         method: 'POST',
         uri: route('auth.login'),
         data: [
@@ -31,5 +31,15 @@ test('user api e2e: login', function () {
         ]
     );
 
-    $response->assertStatus(200);
+    $responseLogin->assertStatus(200);
+
+    $token = $responseLogin->json('token');
+
+    $responseLogout = $this->json(
+        method: 'POST',
+        uri: route('auth.logout'),
+        headers: ['Authorization' => "Bearer $token"]
+    );
+
+    $responseLogout->assertStatus(200);
 });

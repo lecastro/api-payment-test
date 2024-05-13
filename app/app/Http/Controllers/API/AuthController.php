@@ -34,19 +34,19 @@ class AuthController extends Controller
         }
     }
 
-    // public function logout(): JsonResponse
-    // {
-    //     try {
-    //         $response = $this->authService->logout();
+    public function logout(): JsonResponse
+    {
+        try {
+            $response = $this->authService->logout();
 
-    //         return response()->json(
-    //             $response,
-    //             JsonResponse::HTTP_OK,
-    //             [],
-    //             JSON_UNESCAPED_SLASHES
-    //         );
-    //     } catch (\Throwable $th) {
-    //         return $this->handleException($th);
-    //     }
-    // }
+            return response()->json(
+                $response,
+                JsonResponse::HTTP_OK,
+                [],
+                JSON_UNESCAPED_SLASHES
+            );
+        } catch (\Throwable $th) {
+            return $this->handleException($th);
+        }
+    }
 }
