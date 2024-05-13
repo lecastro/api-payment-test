@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Usecase\User\Create\DTO;
 
 class OutputUserDTO

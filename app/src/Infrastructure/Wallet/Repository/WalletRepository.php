@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Infrastructure\Wallet\Repository;
 
 use App\Models\Wallet as Model;

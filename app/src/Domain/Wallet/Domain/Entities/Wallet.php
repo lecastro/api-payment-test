@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Domain\Wallet\Domain\Entities;
 
 use DateTime;
 use Domain\Shared\ValueObjects\Uuid;
 use Domain\Shared\Enums\TypeUserEnum;
-use Domain\Wallet\Domain\validator\WalletValidation;
 use Domain\Shared\Traits\MethodsMagicsTrait;
+use Domain\Wallet\Domain\validator\WalletValidation;
 
 class Wallet
 {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Domain\Transaction\Domain\Service;
 
 use Domain\Wallet\Domain\Service\WalletService;

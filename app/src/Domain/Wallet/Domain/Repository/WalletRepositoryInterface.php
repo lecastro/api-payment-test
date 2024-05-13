@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Domain\Wallet\Domain\Repository;
 
 use Domain\Wallet\Domain\Entities\Wallet;

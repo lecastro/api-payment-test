@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Usecase\Wallet\Deposit;
 
 use Domain\Shared\ValueObjects\Uuid;

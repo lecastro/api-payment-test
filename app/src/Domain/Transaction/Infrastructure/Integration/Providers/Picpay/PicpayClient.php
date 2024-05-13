@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Domain\Transaction\Infrastructure\Integration\Providers\Picpay;
 
 use Illuminate\Support\Facades\Http;

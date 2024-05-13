@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Infrastructure\Transaction\Repository;
 
 use App\Models\Transaction as Model;

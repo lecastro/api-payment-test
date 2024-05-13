@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Domain\Wallet\Domain\validator;
 
 use Domain\Wallet\Domain\validator\Exceptions\WalletException;

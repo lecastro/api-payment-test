@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Domain\Shared\ValueObjects;
 
 use InvalidArgumentException;
@@ -24,7 +26,7 @@ class Uuid
         }
     }
 
-    public function get(): string 
+    public function get(): string
     {
         return $this->value;
     }

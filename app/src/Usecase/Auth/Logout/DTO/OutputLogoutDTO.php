@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Usecase\Auth\Logout\DTO;
 
 class OutputLogoutDTO
