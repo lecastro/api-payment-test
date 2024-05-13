@@ -33,10 +33,10 @@ class CreateUserUseCase
         $this->service->create($user);
 
         return new OutputUserDTO(
-            id: $user->id,
+            id: $user->id->get(),
             name: $user->name,
             email: $user->email,
-            document: $user->document,
+            document: $user->document->get(),
             password: $user->password,
             type: $user->type->value,
             createdAt: $user->createdAt->format('Y-m-d H:i:s')

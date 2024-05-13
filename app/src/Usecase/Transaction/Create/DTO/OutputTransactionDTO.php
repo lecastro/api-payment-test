@@ -8,7 +8,7 @@ class OutputTransactionDTO
 {
     public function __construct(
         public readonly string $id,
-        public readonly string $value,
+        public readonly float $value,
         public readonly string $payer,
         public readonly string $payee,
         public readonly string $status,

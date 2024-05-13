@@ -33,7 +33,7 @@ class CreateTransactionUseCase
 
         return new OutputTransactionDTO(
             id: $transaction->id->get(),
-            value: $transaction->amount,
+            value: (float) $transaction->amount,
             payer: $transaction->payerId->get(),
             payee: $transaction->payeeId->get(),
             status: $transaction->status->value,
