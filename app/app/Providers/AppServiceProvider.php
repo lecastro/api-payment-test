@@ -18,6 +18,9 @@ use Domain\Transaction\Infrastructure\Integration\Providers\CallProvider;
 use Domain\Transaction\Infrastructure\Integration\Notifications\SMS\SMSClient;
 use Domain\Transaction\Infrastructure\Integration\Notifications\Mail\MailClient;
 use Domain\Transaction\Infrastructure\Integration\Providers\Picpay\PicpayClient;
+use Domain\Transaction\Infrastructure\Integration\Notifications\SMS\SMSClientMock;
+use Domain\Transaction\Infrastructure\Integration\Notifications\Mail\MailClientMock;
+use Domain\Transaction\Infrastructure\Integration\Providers\Picpay\PicpayClientMock;
 use Domain\Transaction\Infrastructure\Integration\Providers\AdapterProviderInterface;
 use Domain\Transaction\Infrastructure\Integration\Notifications\AdapterSMSNotification;
 use Domain\Transaction\Infrastructure\Integration\Notifications\AdapterEmailNotification;
@@ -30,9 +33,15 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(TransactionRepositoryInterface::class, TransactionRepository::class);
         $this->app->bind(WalletRepositoryInterface::class, WalletRepository::class);
 
-        $this->app->bind(AdapterProviderInterface::class, PicpayClient::class);
-        $this->app->bind(AdapterEmailNotification::class, MailClient::class);
-        $this->app->bind(AdapterSMSNotification::class, SMSClient::class);
+        if ($this->app->runningInConsole()) {
+            $this->app->bind(AdapterProviderInterface::class, PicpayClientMock::class);
+            $this->app->bind(AdapterEmailNotification::class, MailClientMock::class);
+            $this->app->bind(AdapterSMSNotification::class, SMSClientMock::class);
+        } else {
+            $this->app->bind(AdapterProviderInterface::class, PicpayClient::class);
+            $this->app->bind(AdapterEmailNotification::class, MailClient::class);
+            $this->app->bind(AdapterSMSNotification::class, SMSClient::class);
+        }
 
         $this->app->bind(UserService::class, function ($app) {
             return new UserService(
