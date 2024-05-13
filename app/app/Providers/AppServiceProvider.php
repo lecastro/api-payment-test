@@ -5,11 +5,14 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Domain\Auth\Domain\Service\AuthService;
 use Domain\User\Domain\Service\UserService;
 use Domain\Wallet\Domain\Service\WalletService;
+use Infrastructure\Auth\Repository\AuthRepository;
 use Infrastructure\User\Repository\UserRepository;
 use Infrastructure\Wallet\Repository\WalletRepository;
 use Domain\Transaction\Domain\Service\TransactionService;
+use Domain\Auth\Domain\Repository\AuthRepositoryInterface;
 use Domain\User\Domain\Repository\UserRepositoryInterface;
 use Domain\Wallet\Domain\Repository\WalletRepositoryInterface;
 use Infrastructure\Transaction\Repository\TransactionRepository;
@@ -32,6 +35,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
         $this->app->bind(TransactionRepositoryInterface::class, TransactionRepository::class);
         $this->app->bind(WalletRepositoryInterface::class, WalletRepository::class);
+        $this->app->bind(AuthRepositoryInterface::class, AuthRepository::class);
 
         if ($this->app->runningInConsole()) {
             $this->app->bind(AdapterProviderInterface::class, PicpayClientMock::class);
@@ -52,6 +56,10 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(WalletService::class, function ($app) {
             return new WalletService($app->make(WalletRepositoryInterface::class));
+        });
+
+        $this->app->bind(AuthService::class, function ($app) {
+            return new AuthService($app->make(AuthRepositoryInterface::class));
         });
 
         $this->app->bind(TransactionService::class, function ($app) {

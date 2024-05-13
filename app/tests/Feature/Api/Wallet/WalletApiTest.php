@@ -1,6 +1,5 @@
 <?php
 
-use Faker\Factory;
 use App\Models\User as ModelUser;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Wallet as ModelWallet;
