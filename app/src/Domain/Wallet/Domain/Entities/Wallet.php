@@ -14,7 +14,7 @@ class Wallet
 {
     use MethodsMagicsTrait;
 
-    function __construct(
+    public function __construct(
         protected null|Uuid $id = null,
         protected TypeUserEnum $userType,
         protected Uuid $userId,

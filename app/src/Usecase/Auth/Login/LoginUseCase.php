@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Usecase\Auth\Login;
 
 use Domain\Auth\Domain\Service\AuthService;
-
 use Usecase\Auth\Login\DTO\{
     InputLoginDTO,
     OutputLoginDTO
