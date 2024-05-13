@@ -93,6 +93,12 @@ docker compose exec -it web composer install
 docker compose exec -it web php artisan key:generate
 ```
 
+### Gerar key um (Opcional)
+
+```
+docker compose exec -it web php artisan passport:install
+```
+
 ### Migrar database
 ```
 docker compose exec -it web php artisan migrate
