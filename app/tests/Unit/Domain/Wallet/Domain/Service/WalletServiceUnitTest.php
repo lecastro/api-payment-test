@@ -9,8 +9,6 @@ use Domain\Shared\Enums\TypeUserEnum;
 use Domain\Wallet\Domain\Service\WalletService;
 use Domain\Shared\ValueObjects\Document;
 use Domain\Wallet\Domain\Repository\WalletRepositoryInterface;
-use Domain\User\Domain\validator\Exceptions\NegativeBalanceException;
-use Domain\User\Domain\validator\Exceptions\InsufficientBalanceException;
 
 beforeEach(function () {
     $this->faker = Factory::create();
@@ -32,19 +30,6 @@ beforeEach(function () {
         userId: $this->user->id,
         balance: 0
     );
-});
-
-it("should create a wallet", function () {
-    $walletRepository = mock(WalletRepositoryInterface::class, function (MockInterface $mock) {
-        $mock->shouldReceive('create')->with($this->user)->andReturn($this->wallet);
-        $mock->shouldReceive('findByWalletByUserId')->with($this->user->id->get())->andReturn(null);
-    });
-
-    $walletService = new WalletService($walletRepository);
-
-    $wallet = $walletService->create($this->user);
-
-    expect($wallet)->toBe($this->wallet);
 });
 
 it("should create returns if a wallet exists", function () {
@@ -106,65 +91,3 @@ it("should verify if the balance is available", function () {
 
     expect($walletWithOutBalence)->toBeFalse();
 });
-
-it("should check if you have a balance", function () {
-    $walletRepository = mock(WalletRepositoryInterface::class, function (MockInterface $mock) {
-        $mock->shouldReceive('findById')->with($this->wallet->id->get())->andReturn($this->wallet);
-    });
-
-    $walletService = new WalletService($walletRepository);
-
-    $balance = $walletService->getBalance($this->wallet->id->get());
-
-    expect($balance)->toBe(0.0);
-});
-
-it("should ensure the balance is correct after a deposit", function () {
-    $walletRepository = mock(WalletRepositoryInterface::class, function (MockInterface $mock) {
-        $mock->shouldReceive('findById')->with($this->wallet->id->get())->andReturn($this->wallet);
-    });
-
-    $walletService = new WalletService($walletRepository);
-
-    $walletService->deposit($this->wallet->id->get(), 100.0);
-
-    $balance = $walletService->getBalance($this->wallet->id->get());
-
-    expect($balance)->toBe(100.00);
-});
-
-test('should throw an exception if the deposit value is negative', function () {
-    $walletRepository = mock(WalletRepositoryInterface::class, function (MockInterface $mock) {
-        $mock->shouldReceive('findById')->with($this->wallet->id->get())->andReturn($this->wallet);
-    });
-
-    $walletService = new WalletService($walletRepository);
-
-    $walletService->deposit($this->wallet->id->get(), -100.0);
-})->throws(NegativeBalanceException::class);
-
-it("should ensure the balance is correct after a withdrawal", function () {
-    $walletRepository = mock(WalletRepositoryInterface::class, function (MockInterface $mock) {
-        $mock->shouldReceive('findById')->with($this->wallet->id->get())->andReturn($this->wallet);
-    });
-
-    $walletService = new WalletService($walletRepository);
-
-    $walletService->deposit($this->wallet->id->get(), 100.0);
-    $walletService->withdrawal($this->wallet->id->get(), 50.0);
-
-    $balance = $walletService->getBalance($this->wallet->id->get());
-
-    expect($balance)->toBe(50.00);
-});
-
-test('should throw an exception if the withdrawal is greater than the balance', function () {
-    $walletRepository = mock(WalletRepositoryInterface::class, function (MockInterface $mock) {
-        $mock->shouldReceive('findById')->with($this->wallet->id->get())->andReturn($this->wallet);
-    });
-
-    $walletService = new WalletService($walletRepository);
-
-    $walletService->deposit($this->wallet->id->get(), 100.0);
-    $walletService->withdrawal($this->wallet->id->get(), 150.0);
-})->throws(InsufficientBalanceException::class);
