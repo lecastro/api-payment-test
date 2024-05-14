@@ -27,6 +27,7 @@ services:
       - 3306:3306
     volumes:
       - database:/var/lib/mysql
+      - ./structure.sql:/docker-entrypoint-initdb.d/structure.sql
     environment:
       - MYSQL_DATABASE=laravel
       - MYSQL_USER=root
