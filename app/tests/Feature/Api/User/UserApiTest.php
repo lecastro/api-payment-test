@@ -11,7 +11,7 @@ test('user api e2e: create nem user', function () {
             'name'     => Factory::create()->name(),
             'email'    => Factory::create()->email(),
             'password' => '1234567',
-            'document' => '123.456.789-09',
+            'document' => '639.495.960-03',
             'type'     => TypeUserEnum::CUSTOMER,
         ]
     );
