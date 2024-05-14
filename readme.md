@@ -109,7 +109,15 @@ docker compose exec -it web php artisan migrate
 docker compose exec -it web php artisan test
 ```
 
-### endpoint Registrar um novo usuário
+![Alt text](2.png)
+
+### executando php codesniffer
+```
+docker compose exec -it web composer psr
+```
+![Alt text](1.png)
+
+### Endpoint registrar um novo usuário
 
 #### localhost/api/register
 ```
@@ -123,7 +131,7 @@ docker compose exec -it web php artisan test
 
 ```
 
-response
+Response:
 ```
 {
 	"id": "c9c647df-0fd6-4519-9125-48515a5e00b4",
@@ -136,7 +144,40 @@ response
 }
 ```
 
-### endpoint depositar saldo
+
+### Endpoint autenticar usuário
+
+#### localhost/api/login
+```
+{
+	"email": "dessqqw1d2w34@teste.com",
+	"password": "123456789"
+}
+
+```
+
+Response:
+```
+{
+	"status": "success",
+	"message": "User is logged in successfully.",
+	"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5YzA5MDY2ZS1iZjg1LTQwZDktYThhNy01NmE2MWNmYmNjZTIiLCJqdGkiOiI1MzU4NjU3OTY4ZDY1ZDNkYTRhMzhmOTU3ZTg0OWJkMTVjZDBlM2JhNTk0NmExNzFhMzVmMGM2YmI2ZGZlZTEwYmIxODVjNTQ0Mzk4MDAzOCIsImlhdCI6MTcxNTYyNzM3MS44MjE3MDksIm5iZiI6MTcxNTYyNzM3MS44MjE3MTEsImV4cCI6MTc0NzE2MzM3MS43NzgyOTIsInN1YiI6ImVjNjVlMGNhLWEyZjUtNDY5YS05YWYxLTU3NjFhZjYwODExMCIsInNjb3BlcyI6W119.Hd3yJ803HJuN38V_YLczwl-7ArLSeCkln3qfnDcyeTLg88z7YnnhkQ6TXjVUB2biCozAfHX48y10HuiWCsNOvvku-pLPDndqpZV7zMergBBzQn7HkWefMwWG7TY1Y6nru9KUZ1e22tW6SY4gafZK4Q0aEJdLSWQ1tBRyGv6sD_yqxR8xX-GDRmQmT8-6IFmYGIbCWmRtOsxVQCuSkAOwUsuCkjg1XdO7pArtwX_wG5O3WGU6UBW8cTBvhTnxGkqbwNgWE57h4LNfcvPZXRSsNZavlrRb76ORfPbwiSkEkYO3Jyy_s3-j3lGgX2f1bR-325WiDS9ERWFVzq07FPSOb9D2mwk6SotCxAyJd99ovJOXtgdrC44eKpx2W-oZbrsLeAH3pZIXMHBoRaBNBN7Rop_XmHdBX-CBW8c1I0fZ4KxOA7dNQuDwdVO4FnPAfjaC20t7GecNXLQPy5NU_ZwW3mj55p3LXP-nF4DuwSaKG2YMhvMYChcOeDoKYrlrF70-LhN2F8a_Sf1pgBsRGh9BYV6j--n4RyXSQ-MWNBGc-kkN0p_YOPFMKULVmdIty8E4cv3VEO0BCnnskIh1Ydji2asAY8bInkMISyT6Y299OxxF1yWxuSFcawfddh0d3ovx3TaYjaBKHRrXNbGpTciGD2m7-7CzbiRco8IZthV27gc"
+}
+```
+
+### Endpoint logout usuário
+
+#### localhost/api/logout
+
+reponse
+```
+{
+	"status": "success",
+	"message": "User is logged out successfully"
+}
+```
+
+### Endpoint depositar saldo
 
 #### localhost/api/deposit
 ```
@@ -147,7 +188,7 @@ response
 
 ```
 
-response
+Response:
 ```
 {
 	"walletId": "5e164b9c-09a9-4f6c-bffa-45e7b897c1ec",
@@ -157,7 +198,7 @@ response
 
 #### localhost/api/transfer
 
-### endpoint depositar transferência
+### Endpoint transferência
 
 ```
 {
@@ -168,7 +209,7 @@ response
 
 ```
 
-response
+Response:
 ```
 {
 	"id": "87468751-857e-4c45-bb10-e7713dbedaf1",
